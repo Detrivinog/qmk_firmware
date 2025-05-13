@@ -17,10 +17,12 @@ enum custom_keycodes {
     KC_PRVWD = QK_USER,
     KC_NXTWD,
     KC_LSTRT,
-    KC_LEND
+    KC_LEND,
+    INV_QUES,
+    INV_EXCLM,
 };
 
-enum unicode_names {
+enum unicode_name {
     A_ACUTE,
     E_ACUTE,
     I_ACUTE,
@@ -30,10 +32,12 @@ enum unicode_names {
     E_ACUTE_CAP,
     I_ACUTE_CAP,
     O_ACUTE_CAP,
-    U_ACUTE_CAP
+    U_ACUTE_CAP,
+    N_TILDE,
+    N_TILDE_CAP
 };
 
-const uint32_t unicode_map[] PROGMEM = {
+const uint32_t PROGMEM unicode_map[] = {
     [A_ACUTE] = 0x00E1, // á
     [E_ACUTE] = 0x00E9, // é
     [I_ACUTE] = 0x00ED, // í
@@ -43,7 +47,7 @@ const uint32_t unicode_map[] PROGMEM = {
     [E_ACUTE_CAP] = 0x00C9, // É
     [I_ACUTE_CAP] = 0x00CD, // Í
     [O_ACUTE_CAP] = 0x00D3, // Ó
-    [U_ACUTE_CAP] = 0x00DA  // Ú
+    [U_ACUTE_CAP] = 0x00DA,  // Ú
     [N_TILDE]      = 0x00F1, // ñ
     [N_TILDE_CAP]  = 0x00D1  // Ñ
 };
@@ -51,19 +55,22 @@ const uint32_t unicode_map[] PROGMEM = {
 #define KC_COLEMAK PDF(_COLEMAK)
 #define KC_QWERTY PDF(_QWERTY)
 
-#define A_ACUTE_KEY UC_MOD(A_ACUTE, A_ACUTE_CAP)
-#define E_ACUTE_KEY UC_MOD(E_ACUTE, E_ACUTE_CAP)
-#define I_ACUTE_KEY UC_MOD(I_ACUTE, I_ACUTE_CAP)
-#define O_ACUTE_KEY UC_MOD(O_ACUTE, O_ACUTE_CAP)
-#define U_ACUTE_KEY UC_MOD(U_ACUTE, U_ACUTE_CAP)
-#define N_TILDE_KEY UC_MOD(N_TILDE, N_TILDE_CAP)
+#define A_ACUTE_KEY UP(A_ACUTE, A_ACUTE_CAP)
+#define E_ACUTE_KEY UP(E_ACUTE, E_ACUTE_CAP)
+#define I_ACUTE_KEY UP(I_ACUTE, I_ACUTE_CAP)
+#define O_ACUTE_KEY UP(O_ACUTE, O_ACUTE_CAP)
+#define U_ACUTE_KEY UP(U_ACUTE, U_ACUTE_CAP)
+#define N_TILDE_KEY UP(N_TILDE, N_TILDE_CAP)
 
 #if defined(ENCODER_MAP_ENABLE)
 const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [_COLEMAK] = { ENCODER_CCW_CW(KC_MPRV, KC_MNXT),  ENCODER_CCW_CW(KC_VOLD, KC_VOLU)  },
+    [_NUM] = { ENCODER_CCW_CW(KC_MPRV, KC_MNXT),  ENCODER_CCW_CW(KC_VOLD, KC_VOLU)  },
+    [_ACCENTS] = { ENCODER_CCW_CW(KC_MPRV, KC_MNXT),  ENCODER_CCW_CW(KC_VOLD, KC_VOLU)  },
     [_QWERTY] = { ENCODER_CCW_CW(KC_MPRV, KC_MNXT),  ENCODER_CCW_CW(KC_VOLD, KC_VOLU)  },
     [_LOWER] = { ENCODER_CCW_CW(UG_VALD, UG_VALU),  ENCODER_CCW_CW(UG_HUED, UG_HUEU)  },
     [_RAISE] = { ENCODER_CCW_CW(UG_SATD, UG_SATU),  ENCODER_CCW_CW(KC_RIGHT, KC_LEFT) },
+    [_ADJUST] = { ENCODER_CCW_CW(KC_MPRV, KC_MNXT),  ENCODER_CCW_CW(KC_VOLD, KC_VOLU)  },
 };
 #endif
 
@@ -84,11 +91,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 *            `----------------------------------'           '------''---------------------------'
 */
 [_COLEMAK] = LAYOUT(
-                KC_GRV,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_MINS,
-        HYPR_T(KC_ESC),   KC_Q,   KC_W,    KC_F,    KC_P,    KC_G,                      KC_J,    KC_L,    KC_U,    KC_Y, KC_SCLN,  KC_BSPC,
-    LT(_NUMPAD, KC_TAB),  KC_A,   KC_R,    KC_S,    KC_T,    KC_D,                      KC_H,    KC_N,    KC_E,    KC_I,    KC_O,  KC_QUOT,
-                KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_MPLY,    KC_MUTE, KC_K,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_RSFT,
-        KC_LGUI, KC_LALT, KC_LCTL, TL_LOWR, LT(_ACCENTS, KC_SPC),                   KC_SPC, LT(TL_UPPR, KC_ENT), KC_RCTL, KC_RALT, KC_RGUI
+    KC_GRV,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                              KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_MINS,
+    HYPR_T(KC_ESC),   KC_Q,   KC_W,    KC_F,    KC_P,    KC_G,                      KC_J,    KC_L,    KC_U,    KC_Y, KC_SCLN,  KC_BSPC,
+    LT(_NUM, KC_TAB),  KC_A,   KC_R,    KC_S,    KC_T,    KC_D,                      KC_H,    KC_N,    KC_E,    KC_I,    KC_O,  KC_QUOT,
+            KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_MPLY,    KC_MUTE, KC_K,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_RSFT,
+        KC_LGUI, KC_LALT, KC_LCTL, TL_LOWR, LT(_ACCENTS, KC_SPC),              KC_SPC, LT(TL_UPPR, KC_ENT), KC_RCTL, KC_RALT, KC_RGUI
 ),
 /*
 * ACCENTS
@@ -106,11 +113,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 *            `----------------------------------'           '------''---------------------------'
 */
 [_ACCENTS] = LAYOUT(
-    _______, _______, _______, _______, _______, _______,               _______, _______, _______, _______, _______, _______,
-    _______, _______, _______, _______, _______, _______,               _______, _______, U_ACUTE_KEY, _______, _______, _______,
-    KC_TAB, A_ACUTE_KEY, _______, _______, KC_LSFT, _______,            _______, N_TILDE_KEY, E_ACUTE_KEY, I_ACUTE_KEY, O_ACUTE_KEY,  KC_QUOT,
-    KC_LSFT, _______, _______, _______, _______ , _______,          _______, _______, _______, _______, _______, KC_RSFT,
-                    KC_LGUI,KC_LALT,KC_LCTL,TL_LOWR, KC_ENT,        KC_SPC,  LT(TL_UPPR, KC_ENT), KC_RCTL, KC_RALT, KC_RGUI
+    _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
+    _______, _______, _______, _______, _______, _______,                   _______, _______, U_ACUTE_KEY, _______, _______, _______,
+    KC_TAB, A_ACUTE_KEY, _______, _______, KC_LSFT, _______,                _______, N_TILDE_KEY, E_ACUTE_KEY, I_ACUTE_KEY, O_ACUTE_KEY,  KC_QUOT,
+    KC_LSFT, _______, _______, _______, _______ , _______, _______,      _______, _______, _______, _______, _______, _______, KC_RSFT,
+                    KC_LGUI,KC_LALT,KC_LCTL,TL_LOWR, KC_ENT,                KC_SPC,  LT(TL_UPPR, KC_ENT), KC_RCTL, KC_RALT, KC_RGUI
 ),
 /*
 * NUM
@@ -128,11 +135,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 *            `----------------------------------'           '------''---------------------------'
 */
 [_NUM] = LAYOUT(
-    _______, _______, _______, _______, _______, _______,                    KC_SLSH, _______, _______, _______, KC_PLUS, _______,
-    _______, _______, _______, _______, QK_LLCK, _______,                    KC_MINS, KC_7, KC_8, KC_9, KC_DOT,  KC_BSPC,
-    LT(_NUMPAD, KC_TAB), _______, _______, _______, KC_LSFT, _______,        KC_PLUS, KC_4, KC_5, KC_6, KC_0,    KC_CIRC,
-    KC_LSFT, _______, _______, _______, _______ , _______,          _______, KC_ASTR, KC_1, KC_2, KC_3, KC_SLSH, KC_COMM,
-                KC_LGUI,KC_LALT,KC_LCTL,TL_LOWR, KC_ENT,                KC_SPC,  TL_UPPR, KC_RCTL, KC_RALT, KC_RGUI
+    _______, _______, _______, _______, _______, _______,                        KC_SLSH, _______, _______, _______, KC_PLUS, _______,
+    _______, _______, _______, _______, QK_LLCK, _______,                        KC_MINS,    KC_7,    KC_8,    KC_9,  KC_DOT, KC_BSPC,
+    LT(_NUM, KC_TAB), _______, _______, _______, KC_LSFT, _______,               KC_PLUS,    KC_4,    KC_5,    KC_6,    KC_0, KC_CIRC,
+    KC_LSFT, _______, _______, _______, _______, _______, _______,      _______, KC_ASTR,    KC_1,    KC_2,    KC_3, KC_SLSH, KC_COMM,
+                KC_LGUI,KC_LALT,KC_LCTL,TL_LOWR, KC_ENT,                    KC_SPC,  TL_UPPR, KC_RCTL, KC_RALT, KC_RGUI
 ),
 /* RAISE
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -297,24 +304,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
             }
             break;
+        case INV_QUES:
+            send_unicode_string("¿");
+            return false;
+        case INV_EXCLM:
+            send_unicode_string("¡");
+            return false;
     }
     return true;
 }
 
-
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    if (record->event.pressed) {
-        switch (keycode) {
-            case INV_QUES:
-                send_unicode_string("¿");
-                return false;
-            case INV_EXCLM:
-                send_unicode_string("¡");
-                return false;
-        }
-    }
-    return true;
-}
 
 
 layer_state_t layer_state_set_user(layer_state_t state) {
@@ -365,17 +364,6 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
     return is_keyboard_master() ? rotation : OLED_ROTATION_180;
 }
 
-// --- Tarea principal del OLED ---
-bool oled_task_user(void) {
-    if (is_keyboard_master()) {
-        return render_status();  // <- Asegúrate de definir esta función
-    } else {
-        render_logo();
-        oled_scroll_left();  // Esto activa el scroll animado (si quieres que parpadee)
-        return false;
-    }
-}
-
 // --- Renderizado de capa y LEDs ---
 bool render_status(void) {
     // Capa activa
@@ -410,11 +398,32 @@ bool render_status(void) {
 
     // Mostrar si hay un Layer Lock activo (QK_LLCK)
     // Este ejemplo asume que tienes bloqueable el layer _FN
-    if (is_layer_locked(_FN)) {
-        oled_write_ln_P(PSTR("LOCK "), false);  // Muestra "LOCK" si FN está bloqueado
+    bool any_locked = false;
+    uint8_t locked_layers[] = {_NUM, _LOWER, _RAISE, _ADJUST};
+
+    for (int i = 0; i < sizeof(locked_layers)/sizeof(locked_layers[0]); i++) {
+        if (is_layer_locked(locked_layers[i])) {
+            any_locked = true;
+            break;
+        }
+    }
+
+    if (any_locked) {
+        oled_write_ln_P(PSTR("LOCK "), false);
     }
 
     return false;
+}
+
+// --- Tarea principal del OLED ---
+bool oled_task_user(void) {
+    if (is_keyboard_master()) {
+        return render_status();  // <- Asegúrate de definir esta función
+    } else {
+        render_logo();
+        oled_scroll_left();  // Esto activa el scroll animado (si quieres que parpadee)
+        return false;
+    }
 }
 
 #endif
