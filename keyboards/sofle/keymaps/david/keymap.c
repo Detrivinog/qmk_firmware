@@ -117,7 +117,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     _______, _______, _______, _______, _______, _______,                   _______, _______, U_ACUTE_KEY, _______, _______, _______,
     KC_TAB, A_ACUTE_KEY, _______, _______, KC_LSFT, _______,                _______, N_TILDE_KEY, E_ACUTE_KEY, I_ACUTE_KEY, O_ACUTE_KEY,  KC_QUOT,
     KC_LSFT, _______, _______, _______, _______ , _______, _______,      _______, _______, _______, _______, _______, _______, KC_RSFT,
-                    KC_LGUI,KC_LALT,KC_LCTL,TL_LOWR, KC_ENT,                KC_SPC,  LT(TL_UPPR, KC_ENT), KC_RCTL, KC_RALT, KC_RGUI
+                    KC_LGUI,KC_LALT,KC_LCTL,TL_LOWR, KC_ENT,                KC_SPC,  TL_UPPR, KC_RCTL, KC_RALT, KC_RGUI
 ),
 /*
 * NUM
@@ -141,27 +141,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_LSFT, _______, _______, _______, _______, _______, _______,      _______, KC_ASTR,    KC_1,    KC_2,    KC_3, KC_SLSH, KC_COMM,
                 KC_LGUI,KC_LALT,KC_LCTL,TL_LOWR, KC_ENT,                    KC_SPC,  TL_UPPR, KC_RCTL, KC_RALT, KC_RGUI
 ),
-/* RAISE
- * ,-----------------------------------------.                    ,-----------------------------------------.
- * |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |                    |  F7  |  F8  |  F9  | F10  | F11  | F12  |
- * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | LLOCK|   #  |   @  |   +  |   (  |  )   |                    |   -  |   "  |   |  |   $  |  ;   | Bspc |
- * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | Tab  |   ¿  |   ?  |   =  |   [  |  ]   |-------.    ,-------|   +  |   '  |   _  |   ~  |   :  |   ^  |
- * |------+------+------+------+------+------|  MUTE |    |       |------+------+------+------+------+------|
- * | Shift|   ¡  |   !  |   -  |   {  |   }  |-------|    |-------|   *  |   `  |   &  |   %  |   \  | Shift|
- * `-----------------------------------------/       /     \      \-----------------------------------------'
- *            | LGUI | LAlt | LCTR |LOWER | /Enter  /       \Space \  |RAISE | RCTR | RAlt | RGUI |
- *            |      |      |      |      |/       /         \      \ |      |      |      |      |
- *            `----------------------------------'           '------''---------------------------'
- */
-[_RAISE] = LAYOUT(
-    KC_F1,   KC_F2,     KC_F3,   KC_F4,   KC_F5,   KC_F6,                             KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,  KC_F12,
-    QK_LLCK, KC_HASH,   KC_AT, KC_PLUS, KC_LPRN, KC_RPRN,                           KC_MINS, KC_DQUO, KC_PIPE,  KC_DLR, KC_SCLN, KC_BSPC,
-    _______, INV_QUES, KC_QUES, KC_EQL, KC_LBRC, KC_RBRC,                           KC_PLUS, KC_QUOT, KC_UNDS, KC_TILD, KC_COLN, KC_CIRC,
-    _______, INV_EXCLM, KC_EXLM, KC_MINS, KC_LCBR, KC_RCBR, _______,       _______, KC_ASTR,  KC_GRV, KC_AMPR, KC_PERC, KC_BSLS, _______,
-                    _______, _______, _______, _______, KC_ENT,            KC_SPC, _______, _______, _______, _______
-),
 /* LOWER
  * ,----------------------------------------.                      ,-----------------------------------------.
  * |      |      |      |      |      |      |                     |      |      |      |      |      |      |
@@ -183,6 +162,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   _______, KC_UNDO, KC_CUT, KC_COPY, KC_PASTE, XXXXXXX,  _______,       _______,  XXXXXXX, KC_LSTRT, XXXXXXX, KC_LEND,   XXXXXXX, _______,
                     KC_LGUI,KC_LALT,KC_LCTL,TL_LOWR, KC_ENT,                 KC_SPC,  TL_UPPR, KC_RCTL, KC_RALT, KC_RGUI
 ),
+/* RAISE
+ * ,-----------------------------------------.                    ,-----------------------------------------.
+ * |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |                    |  F7  |  F8  |  F9  | F10  | F11  | F12  |
+ * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ * | LLOCK|   #  |   @  |   +  |   (  |  )   |                    |   -  |   "  |   |  |   $  |  ;   | Bspc |
+ * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ * | Tab  |   ¿  |   ?  |   =  |   [  |  ]   |-------.    ,-------|   +  |   '  |   _  |   ~  |   :  |   ^  |
+ * |------+------+------+------+------+------|  MUTE |    |       |------+------+------+------+------+------|
+ * | Shift|   ¡  |   !  |   -  |   {  |   }  |-------|    |-------|   *  |   `  |   &  |   %  |   \  | Shift|
+ * `-----------------------------------------/       /     \      \-----------------------------------------'
+ *            | LGUI | LAlt | LCTR |LOWER | /Enter  /       \Space \  |RAISE | RCTR | RAlt | RGUI |
+ *            |      |      |      |      |/       /         \      \ |      |      |      |      |
+ *            `----------------------------------'           '------''---------------------------'
+ */
+[_RAISE] = LAYOUT(
+    KC_F1,   KC_F2,     KC_F3,   KC_F4,   KC_F5,   KC_F6,                             KC_F7,   KC_F8,   KC_F9,  KC_F10,  KC_F11,  KC_F12,
+    QK_LLCK, KC_HASH,   KC_AT, KC_PLUS, KC_LPRN, KC_RPRN,                           KC_MINS, KC_DQUO, KC_PIPE,  KC_DLR, KC_SCLN, KC_BSPC,
+    _______, INV_QUES, KC_QUES, KC_EQL, KC_LBRC, KC_RBRC,                           KC_PLUS, KC_QUOT, KC_UNDS, KC_TILD, KC_COLN, KC_CIRC,
+    _______, INV_EXCLM, KC_EXLM, KC_MINS, KC_LCBR, KC_RCBR, _______,       _______, KC_ASTR,  KC_GRV, KC_AMPR, KC_PERC, KC_BSLS, _______,
+                    _______, _______, _______, _______, KC_ENT,            KC_SPC, _______, _______, _______, _______
+),
 /* ADJUST
  * ,-----------------------------------------.                    ,-----------------------------------------.
  * |      |      |      |      |      |      |                    |      | RGB  |      |      |      |      |
@@ -197,7 +197,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *            |      |      |      |      |/       /         \      \ |      |      |      |      |
  *            `----------------------------------'           '------''---------------------------'
  */
-  [_ADJUST] = LAYOUT(
+[_ADJUST] = LAYOUT(
   XXXXXXX , XXXXXXX,  XXXXXXX ,  XXXXXXX , XXXXXXX, XXXXXXX,                     XXXXXXX, UG_TOGG, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   QK_BOOT , XXXXXXX, KC_QWERTY, KC_COLEMAK, QK_LLCK,XXXXXXX,                     XXXXXXX, UG_VALU, UG_SATU, UG_HUEU, KC_BRIU, XXXXXXX,
   XXXXXXX , XXXXXXX, CG_TOGG, XXXXXXX,    KC_LSFT,  XXXXXXX,                     XXXXXXX, KC_VOLD, KC_MUTE, KC_VOLU, KC_BRID, XXXXXXX,
@@ -315,33 +315,40 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 
-
 layer_state_t layer_state_set_user(layer_state_t state) {
-    switch (get_highest_layer(state)) {
+    // Obtener saturación y valor actuales
+    uint8_t current_sat = rgblight_get_sat();
+    uint8_t current_val = rgblight_get_val();
+    uint8_t new_hue = 0;
+
+    switch (get_highest_layer(state)) {        
         case _COLEMAK:
-        rgblight_sethsv(0, 0, 255);
-        break;
-        case _NUM:
-        rgblight_sethsv(HSV_CYAN);
-        break;
-        case _ACCENTS:
-        rgblight_sethsv(HSV_GREEN);
-        break;
-        case _LOWER:
-        rgblight_sethsv(HSV_ORANGE);
-        break;
-        case _RAISE:
-        rgblight_sethsv(HSV_PURPLE);
-        break;
-        case _ADJUST:
-        rgblight_sethsv(HSV_RED);
-        break;
-        case _QWERTY:
-        rgblight_sethsv(HSV_GREEN);
-        break;
-        default:
+            new_hue = 250;  // white
             break;
+        case _NUM:
+            new_hue = 128;  // cyan
+            break;
+        case _ACCENTS:
+            new_hue = 85;   // green
+            break;
+        case _LOWER:
+            new_hue = 32;   // orange (rojo + un poco de amarillo)
+            break;
+        case _RAISE:
+            new_hue = 192;  // purple
+            break;
+        case _ADJUST:
+            new_hue = 0;    // red
+            break;
+        case _QWERTY:
+            new_hue = 0;    // sin color (o usa sat = 0)
+            current_sat = 0;
+            break;
+        default:
+            return state;
     }
+
+    rgblight_sethsv_noeeprom(new_hue, current_sat, current_val);
     return state;
 }
 
@@ -367,8 +374,8 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 // --- Renderizado de capa y LEDs ---
 bool render_status(void) {
     // Capa activa
-    oled_write_P(PSTR("David\n Key\n "), false);
-    oled_write_P(PSTR("Layer: \n"), false);
+    oled_write_P(PSTR("David\n Key \n \n =] \n \n"), false);
+    oled_write_P(PSTR("Layer:\n"), false);
     switch (get_highest_layer(layer_state)) {
         case _COLEMAK:
             oled_write_ln_P(PSTR("Col\n"), false);
@@ -386,10 +393,10 @@ bool render_status(void) {
             oled_write_ln_P(PSTR("Adjus\n"), false);
             break;
         case _ACCENTS:
-            oled_write_ln_P(PSTR("Accents\n"), false);
+            oled_write_ln_P(PSTR("Accen\n"), false);
             break;
         default:
-            oled_write_ln_P(PSTR("Undefined\n"), false);
+            oled_write_ln_P(PSTR("Undef\n"), false);
     }
 
     // Mostrar solo estado de Caps Lock
