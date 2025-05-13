@@ -7,10 +7,10 @@ enum sofle_layers {
     _COLEMAK,
     _ACCENTS,
     _NUM,
-    _QWERTY,
     _LOWER,
     _RAISE,
     _ADJUST,
+    _QWERTY,
 };
 
 enum custom_keycodes {
@@ -367,29 +367,29 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 // --- Renderizado de capa y LEDs ---
 bool render_status(void) {
     // Capa activa
-    oled_write_P(PSTR("David\n Keyboard "), false);
-    oled_write_P(PSTR("Layer: "), false);
+    oled_write_P(PSTR("David\n Key\n "), false);
+    oled_write_P(PSTR("Layer: \n"), false);
     switch (get_highest_layer(layer_state)) {
         case _COLEMAK:
-            oled_write_ln_P(PSTR("Colemak"), false);
+            oled_write_ln_P(PSTR("Col\n"), false);
             break;
         case _NUM:
-            oled_write_ln_P(PSTR("Num"), false);
+            oled_write_ln_P(PSTR("Num\n"), false);
             break;
         case _LOWER:
-            oled_write_ln_P(PSTR("Lower"), false);
+            oled_write_ln_P(PSTR("Lower\n"), false);
             break;
         case _RAISE:
-            oled_write_ln_P(PSTR("Raise"), false);
+            oled_write_ln_P(PSTR("Raise\n"), false);
             break;
         case _ADJUST:
-            oled_write_ln_P(PSTR("Adj"), false);
+            oled_write_ln_P(PSTR("Adjus\n"), false);
             break;
         case _ACCENTS:
-            oled_write_ln_P(PSTR("Accents"), false);
+            oled_write_ln_P(PSTR("Accents\n"), false);
             break;
         default:
-            oled_write_ln_P(PSTR("Undefined"), false);
+            oled_write_ln_P(PSTR("Undefined\n"), false);
     }
 
     // Mostrar solo estado de Caps Lock
