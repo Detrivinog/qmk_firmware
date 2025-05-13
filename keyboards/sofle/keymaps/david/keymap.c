@@ -95,7 +95,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     HYPR_T(KC_ESC),   KC_Q,   KC_W,    KC_F,    KC_P,    KC_G,                      KC_J,    KC_L,    KC_U,    KC_Y, KC_SCLN,  KC_BSPC,
     LT(_NUM, KC_TAB),  KC_A,   KC_R,    KC_S,    KC_T,    KC_D,                      KC_H,    KC_N,    KC_E,    KC_I,    KC_O,  KC_QUOT,
             KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_MPLY,    KC_MUTE, KC_K,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_RSFT,
-        KC_LGUI, KC_LALT, KC_LCTL, TL_LOWR, LT(_ACCENTS, KC_SPC),              KC_SPC, LT(TL_UPPR, KC_ENT), KC_RCTL, KC_RALT, KC_RGUI
+        KC_LGUI, KC_LALT, KC_LCTL, TL_LOWR, LT(_ACCENTS, KC_SPC),              KC_SPC, LT(_RAISE, KC_ENT), KC_RCTL, KC_RALT, KC_RGUI
 ),
 /*
 * ACCENTS
@@ -375,7 +375,7 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 bool render_status(void) {
     // Capa activa
     oled_write_P(PSTR("David\n Key \n \n =] \n \n"), false);
-    oled_write_P(PSTR("Layer:\n"), false);
+    oled_write_P(PSTR("\nLayer:\n"), false);
     switch (get_highest_layer(layer_state)) {
         case _COLEMAK:
             oled_write_ln_P(PSTR("Col\n"), false);
