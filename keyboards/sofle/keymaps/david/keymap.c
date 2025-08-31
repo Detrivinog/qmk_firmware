@@ -4,13 +4,13 @@
 
 enum sofle_layers {
     /* _M_XYZ = Mac Os, _W_XYZ = Win/Linux */
+    _QWERTY,
     _COLEMAK,
     _ACCENTS,
     _NUM,
     _LOWER,
     _RAISE,
     _ADJUST,
-    _QWERTY,
 };
 
 enum custom_keycodes {
@@ -52,8 +52,8 @@ const uint32_t PROGMEM unicode_map[] = {
     [N_TILDE_CAP]  = 0x00D1  // Ñ
 };
 
-#define KC_COLEMAK PDF(_COLEMAK)
 #define KC_QWERTY PDF(_QWERTY)
+#define KC_COLEMAK PDF(_COLEMAK)
 
 #define A_ACUTE_KEY UP(A_ACUTE, A_ACUTE_CAP)
 #define E_ACUTE_KEY UP(E_ACUTE, E_ACUTE_CAP)
@@ -76,26 +76,26 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*
-* COLEMAK
-* ,-----------------------------------------.                    ,-----------------------------------------.
-* |  `   |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |   -  |
-* |------+------+------+------+------+------|                    |------+------+------+------+------+------|
-* | ESC  |   Q  |   W  |   F  |   P  |   G  |                    |   J  |   L  |   U  |   Y  |   ;  | Bspc |
-* |------+------+------+------+------+------|                    |------+------+------+------+------+------|
-* | TAB  |   A  |   R  |   S  |   T  |   D  |-------.    ,-------|   H  |   N  |   E  |   I  |   O  |  '   |
-* |------+------+------+------+------+------|  PLAY |    | MUTE  |------+------+------+------+------+------|
-* |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   K  |   M  |   ,  |   .  |   /  |RShift|
-* `-----------------------------------------/       /     \      \-----------------------------------------'
-*            | LGUI | LAlt | LCTR |LOWER | /Space  /       \Space \  |Enter | RCTR | RAlt | RGUI |
-*            |      |      |      |      |/ACCENTS/         \      \ |RAISE |      |      |      |
-*            `----------------------------------'           '------''---------------------------'
-*/
-[_COLEMAK] = LAYOUT(
-    KC_GRV,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                              KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_MINS,
-    HYPR_T(KC_ESC),   KC_Q,   KC_W,    KC_F,    KC_P,    KC_G,                      KC_J,    KC_L,    KC_U,    KC_Y, KC_SCLN,  KC_BSPC,
-    LT(_NUM, KC_TAB),  KC_A,   KC_R,    KC_S,    KC_T,    KC_D,                      KC_H,    KC_N,    KC_E,    KC_I,    KC_O,  KC_QUOT,
-            KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_MPLY,    KC_MUTE, KC_K,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_RSFT,
-        KC_LGUI, KC_LALT, KC_LCTL, TL_LOWR, LT(_ACCENTS, KC_SPC),              KC_SPC, LT(_RAISE, KC_ENT), KC_RCTL, KC_RALT, KC_RGUI
+ * QWERTY
+ * ,-----------------------------------------.                    ,-----------------------------------------.
+ * |  `   |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |  `   |
+ * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ * | ESC  |   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  | Bspc |
+ * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ * | Tab  |   A  |   S  |   D  |   F  |   G  |-------.    ,-------|   H  |   J  |   K  |   L  |   ;  |  '   |
+ * |------+------+------+------+------+------|  PLAY |    | MUTE  |------+------+------+------+------+------|
+ * |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |RShift|
+ * `-----------------------------------------/       /     \      \-----------------------------------------'
+ *            | LGUI | LAlt | LCTR |LOWER | /Enter  /       \Space \  |RAISE | RCTR | RAlt | RGUI |
+ *            |      |      |      |      |/       /         \      \ |      |      |      |      |
+ *            `----------------------------------'           '------''---------------------------'
+ */
+[_QWERTY] = LAYOUT(
+    KC_GRV,           KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                       KC_6,   KC_7,    KC_8,    KC_9,    KC_0,  KC_GRV,
+    HYPR_T(KC_ESC),   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                       KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,  KC_BSPC,
+    LT(_NUM, KC_TAB), KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                       KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN,  LT(_ACCENTS, KC_QUOT),
+    KC_LSFT,          KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_MPLY,      KC_MUTE,KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_RSFT,
+                    KC_LGUI,KC_LALT,KC_LCTL, TL_LOWR, KC_SPC,                 KC_ENT, LT(_RAISE, KC_SPC), KC_RCTL, KC_RALT, KC_RGUI
 ),
 /*
 * ACCENTS
@@ -114,9 +114,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 */
 [_ACCENTS] = LAYOUT(
     _______, _______, _______, _______, _______, _______,                   _______, _______, _______, _______, _______, _______,
-    _______, _______, _______, _______, _______, _______,                   _______, _______, U_ACUTE_KEY, _______, _______, _______,
-    KC_TAB, A_ACUTE_KEY, _______, _______, KC_LSFT, _______,                _______, N_TILDE_KEY, E_ACUTE_KEY, I_ACUTE_KEY, O_ACUTE_KEY,  KC_QUOT,
-    KC_LSFT, _______, _______, _______, _______ , _______, _______,      _______, _______, _______, _______, _______, _______, KC_RSFT,
+    _______, _______, _______, E_ACUTE_KEY, _______, _______,                   _______, _______, U_ACUTE_KEY, I_ACUTE_KEY, O_ACUTE_KEY, _______,
+    KC_TAB, A_ACUTE_KEY, _______, _______, KC_LSFT, _______,                _______, N_TILDE_KEY, E_ACUTE_KEY, I_ACUTE_KEY, O_ACUTE_KEY,  _______,
+    KC_LSFT, _______, _______, _______, _______ , _______, _______,      _______, N_TILDE_KEY, _______, _______, _______, _______, KC_RSFT,
                     KC_LGUI,KC_LALT,KC_LCTL,TL_LOWR, KC_ENT,                KC_SPC,  TL_UPPR, KC_RCTL, KC_RALT, KC_RGUI
 ),
 /*
@@ -185,9 +185,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 ),
 /* ADJUST
  * ,-----------------------------------------.                    ,-----------------------------------------.
- * |      |      |      |      |      |      |                    |      | RGB  |      |      |      |      |
+ * |      |QWERTY|      |      |      |      |                    |      | RGB  |      |      |      |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | BOOT |      |QWERTY|COLEMA| LLCK |      |                    |      |  VAL |  SAT | HUE  | BRIU |      |
+ * | BOOT |      |      |COLEMA| LLCK |      |                    |      |  VAL |  SAT | HUE  | BRIU |      |
  * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
  * |      |      |MACWIN|      | Shift|      |-------.    ,-------|      | VOLDO| MUTE | VOLUP| BRID |      |
  * |------+------+------+------+------+------|  MUTE |    |       |------+------+------+------+------+------|
@@ -198,33 +198,33 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *            `----------------------------------'           '------''---------------------------'
  */
 [_ADJUST] = LAYOUT(
-  XXXXXXX , XXXXXXX,  XXXXXXX ,  XXXXXXX , XXXXXXX, XXXXXXX,                     XXXXXXX, UG_TOGG, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-  QK_BOOT , XXXXXXX, KC_QWERTY, KC_COLEMAK, QK_LLCK,XXXXXXX,                     XXXXXXX, UG_VALU, UG_SATU, UG_HUEU, KC_BRIU, XXXXXXX,
+  XXXXXXX ,KC_QWERTY, XXXXXXX,  XXXXXXX, XXXXXXX, XXXXXXX,                     XXXXXXX, UG_TOGG, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+  QK_BOOT , XXXXXXX, XXXXXXX, KC_COLEMAK, QK_LLCK,XXXXXXX,                     XXXXXXX, UG_VALU, UG_SATU, UG_HUEU, KC_BRIU, XXXXXXX,
   XXXXXXX , XXXXXXX, CG_TOGG, XXXXXXX,    KC_LSFT,  XXXXXXX,                     XXXXXXX, KC_VOLD, KC_MUTE, KC_VOLU, KC_BRID, XXXXXXX,
   XXXXXXX , XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX,  XXXXXXX, XXXXXXX,     XXXXXXX, XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, XXXXXXX, XXXXXXX,
                    KC_LGUI,KC_LALT,KC_LCTL,TL_LOWR, KC_ENT,                    KC_SPC,  TL_UPPR, KC_RCTL, KC_RALT, KC_RGUI
 ),
 /*
- * QWERTY
- * ,-----------------------------------------.                    ,-----------------------------------------.
- * |  `   |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |  `   |
- * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | ESC  |   Q  |   W  |   E  |   R  |   T  |                    |   Y  |   U  |   I  |   O  |   P  | Bspc |
- * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
- * | Tab  |   A  |   S  |   D  |   F  |   G  |-------.    ,-------|   H  |   J  |   K  |   L  |   ;  |  '   |
- * |------+------+------+------+------+------|  PLAY |    | MUTE  |------+------+------+------+------+------|
- * |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   N  |   M  |   ,  |   .  |   /  |RShift|
- * `-----------------------------------------/       /     \      \-----------------------------------------'
- *            | LGUI | LAlt | LCTR |LOWER | /Enter  /       \Space \  |RAISE | RCTR | RAlt | RGUI |
- *            |      |      |      |      |/       /         \      \ |      |      |      |      |
- *            `----------------------------------'           '------''---------------------------'
- */
-[_QWERTY] = LAYOUT(
-    KC_GRV,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                     KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_GRV,
-    KC_ESC,   KC_Q,   KC_W,    KC_E,    KC_R,    KC_T,                     KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,  KC_BSPC,
-    KC_TAB,   KC_A,   KC_S,    KC_D,    KC_F,    KC_G,                     KC_H,    KC_J,    KC_K,    KC_L, KC_SCLN,  KC_QUOT,
-    KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_MPLY,    KC_MUTE,KC_N,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_RSFT,
-                   KC_LGUI,KC_LALT,KC_LCTL, TL_LOWR, KC_ENT,      KC_SPC,  TL_UPPR, KC_RCTL, KC_RALT, KC_RGUI
+* COLEMAK
+* ,-----------------------------------------.                    ,-----------------------------------------.
+* |  `   |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |   -  |
+* |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+* | ESC  |   Q  |   W  |   F  |   P  |   G  |                    |   J  |   L  |   U  |   Y  |   ;  | Bspc |
+* |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+* | TAB  |   A  |   R  |   S  |   T  |   D  |-------.    ,-------|   H  |   N  |   E  |   I  |   O  |  '   |
+* |------+------+------+------+------+------|  PLAY |    | MUTE  |------+------+------+------+------+------|
+* |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   K  |   M  |   ,  |   .  |   /  |RShift|
+* `-----------------------------------------/       /     \      \-----------------------------------------'
+*            | LGUI | LAlt | LCTR |LOWER | /Space  /       \Space \  |Enter | RCTR | RAlt | RGUI |
+*            |      |      |      |      |/ACCENTS/         \      \ |RAISE |      |      |      |
+*            `----------------------------------'           '------''---------------------------'
+*/
+[_COLEMAK] = LAYOUT(
+    KC_GRV,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                              KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_MINS,
+    HYPR_T(KC_ESC),   KC_Q,   KC_W,    KC_F,    KC_P,    KC_G,                      KC_J,    KC_L,    KC_U,    KC_Y, KC_SCLN,  KC_BSPC,
+    LT(_NUM, KC_TAB),  KC_A,   KC_R,    KC_S,    KC_T,    KC_D,                     KC_H,    KC_N,    KC_E,    KC_I,    KC_O,  LT(_ACCENTS, KC_QUOT),
+    KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_MPLY,             KC_MUTE, KC_K,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_RSFT,
+                KC_LGUI, KC_LALT, KC_LCTL, TL_LOWR, KC_SPC,              KC_ENT, LT(_RAISE, KC_SPC), KC_RCTL, KC_RALT, KC_RGUI
 )
 };
 
@@ -322,8 +322,8 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     uint8_t new_hue = 0;
 
     switch (get_highest_layer(state)) {        
-        case _COLEMAK:
-            new_hue = 250;  // white
+        case _QWERTY:
+            new_hue = 255;  // white
             break;
         case _NUM:
             new_hue = 128;  // cyan
@@ -340,7 +340,7 @@ layer_state_t layer_state_set_user(layer_state_t state) {
         case _ADJUST:
             new_hue = 0;    // red
             break;
-        case _QWERTY:
+        case _COLEMAK:
             new_hue = 0;    // sin color (o usa sat = 0)
             current_sat = 0;
             break;
@@ -379,6 +379,9 @@ bool render_status(void) {
     switch (get_highest_layer(layer_state)) {
         case _COLEMAK:
             oled_write_ln_P(PSTR("Col\n"), false);
+            break;
+        case _QWERTY:
+            oled_write_ln_P(PSTR("Qwert\n"), false);
             break;
         case _NUM:
             oled_write_ln_P(PSTR("Num\n"), false);
